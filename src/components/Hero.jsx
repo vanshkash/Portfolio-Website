@@ -35,7 +35,7 @@ export default function Hero() {
       {/* Background Gradient Blob */}
       <div className="absolute top-0 left-0 w-[400px] h-[400px] bg-gradient-to-r from-blue-200 via-purple-200 to-pink-200 rounded-full blur-3xl opacity-30 animate-pulse"></div>
 
-      <div className="max-w-7xl mx-auto px-4 py-12 grid md:grid-cols-2 gap-10 items-center relative z-10">
+      <div className="max-w-7xl mx-auto px-4 pt-28 md:pt-12 grid md:grid-cols-2 gap-10 items-center relative z-10">
         {/* Right: Profile Image with Animated Rings */}
         <motion.div
           className="flex justify-center md:justify-end order-1 md:order-2"
@@ -88,7 +88,7 @@ export default function Hero() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
         >
-          <p className="text-blue-600 font-medium text-4xl">Hi, I'm</p>
+          <p className="text-blue-600 font-medium text-2xl md:text-4xl">Hi, I'm</p>
           <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight">
             Vansh Kashyap
           </h1>

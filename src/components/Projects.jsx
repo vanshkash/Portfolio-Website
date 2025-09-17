@@ -15,7 +15,7 @@ export default function Projects() {
       description: "A fully responsive and modern personal portfolio site built with React and TailwindCSS. It showcases my projects, skills, and experience in an elegant way, with smooth animations and a clean UI to leave a professional impression.",
       image: "./Images/Projects/portfolio.webp",
       link: "#",
-      github: "https://github.com/yourusername/portfolio"
+      github: "https://github.com/vanshkash/Portfolio-Website.git"
     },
     { 
       title: "Sunrise Printers-Under Development",

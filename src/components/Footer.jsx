@@ -1,7 +1,7 @@
 // Footer.jsx
 import React from "react";
 import { motion } from "framer-motion";
-import { FaLinkedin, FaGithub, FaTwitter } from "react-icons/fa";
+import { FaLinkedin, FaGithub,FaWhatsapp } from "react-icons/fa";
 
 const Footer = () => {
   const socialIconClass = "text-xl text-white hover:text-blue-400 transition-colors";
@@ -32,28 +32,32 @@ const Footer = () => {
         {/* Social Icons with Scale Animation */}
         <div className="flex gap-4">
           <motion.a
-            href="#"
+            href="https://www.linkedin.com/in/vansh-kashyap-695965307/"
             className={socialIconClass}
             whileHover={{ scale: 1.2 }}
             transition={{ type: "spring", stiffness: 300 }}
+            target="_blank"
           >
             <FaLinkedin />
           </motion.a>
           <motion.a
-            href="#"
+            href="https://github.com/vanshkash"
             className={socialIconClass}
             whileHover={{ scale: 1.2 }}
             transition={{ type: "spring", stiffness: 300 }}
+            target="_blank"
           >
             <FaGithub />
           </motion.a>
           <motion.a
-            href="#"
+            href="https://wa.me/917983202009?text=Hi%20Vansh%2C%20I%20found%20your%20portfolio%20and%20would%20like%20to%20connect.%20
+"
             className={socialIconClass}
             whileHover={{ scale: 1.2 }}
             transition={{ type: "spring", stiffness: 300 }}
+            target="_blank"
           >
-            <FaTwitter />
+            <FaWhatsapp />
           </motion.a>
         </div>
       </div>
