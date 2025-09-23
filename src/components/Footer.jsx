@@ -32,7 +32,7 @@ const Footer = () => {
         {/* Social Icons with Scale Animation */}
         <div className="flex gap-4">
           <motion.a
-            href="https://www.linkedin.com/in/vansh-kashyap-695965307/"
+            href="https://www.linkedin.com/in/vansh-kashyap-b83877307/"
             className={socialIconClass}
             whileHover={{ scale: 1.2 }}
             transition={{ type: "spring", stiffness: 300 }}

@@ -46,13 +46,13 @@ export default function Hero() {
           <div className="relative flex items-center justify-center">
             {/* Animated Rings */}
             <motion.div
-              className="absolute w-56 h-56 md:w-72 md:h-72 rounded-full border border-blue-300 opacity-30"
-              animate={{ rotate: 360 }}
+              className="absolute w-56 h-56 md:w-72 md:h-72 rounded-full border border-blue-600 opacity-30"
+              // animate={{ rotate: 360 }}
               transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
             />
             <motion.div
-              className="absolute w-64 h-64 md:w-80 md:h-80 rounded-full border border-purple-300 opacity-20"
-              animate={{ rotate: -360 }}
+              className="absolute w-64 h-64 md:w-80 md:h-80 rounded-full border border-purple-600 opacity-20"
+              // animate={{ rotate: -360 }}
               transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
             />
             {/* Floating Dots */}
@@ -94,7 +94,7 @@ export default function Hero() {
             {text}
             <span className="border-r-2 border-gray-800 animate-pulse ml-1"></span>
           </h2>
-          <p className="text-gray-600 max-w-md mx-auto md:mx-0 text-base md:text-xl">
+          <p className="text-gray-600 max-w-md mx-auto md:mx-0 text-base md:text-xl font-semibold">
             I build responsive, fast and modern web applications using React, Node.js, Express, and MongoDB.
           </p>
 
@@ -104,7 +104,7 @@ export default function Hero() {
               to="Projects"
               smooth={true}
               duration={500}
-              className="px-4 py-2 md:px-5 md:py-3 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 cursor-pointer transform transition-transform duration-300 hover:scale-110 text-sm md:text-base"
+              className="px-4 py-3 md:px-5 md:py-3 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 cursor-pointer transform transition-transform duration-300 hover:scale-110 text-sm md:text-base"
             >
               View Projects
             </Link>
@@ -112,14 +112,14 @@ export default function Hero() {
               to="Contact"
               smooth={true}
               duration={500}
-              className="px-4 py-2 md:px-5 md:py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 cursor-pointer transform transition-transform duration-300 hover:scale-110 text-sm md:text-base"
+              className="px-4 py-3 md:px-5 md:py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 cursor-pointer transform transition-transform duration-300 hover:scale-110 text-sm md:text-base"
             >
               Contact Me
             </Link>
             <a
               href="./Resume/marksheet.pdf"
               download="Vansh-Kashyap-Resume"
-              className="px-4 py-2 md:px-5 md:py-3 bg-green-600 text-white rounded-lg shadow flex items-center gap-1 md:gap-2 hover:bg-green-700 transform transition-transform duration-300 hover:scale-110 text-sm md:text-base"
+              className="px-4 py-3 md:px-5 md:py-3 bg-green-600 text-white rounded-lg shadow flex items-center gap-1 md:gap-2 hover:bg-green-700 transform transition-transform duration-300 hover:scale-110 text-sm md:text-base"
             >
               <Download className="w-4 h-4 md:w-5 md:h-5" />
               Download Resume

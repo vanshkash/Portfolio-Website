@@ -27,7 +27,7 @@ export default function About() {
       <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-8 md:gap-12 items-start">
         {/* Left: About Info */}
         <div>
-          <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-3 md:mb-4">
+          <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-3 md:mb-4 text-center md:text-left">
             About Me
           </h2>
           <p className="text-gray-700 leading-relaxed mb-4 md:mb-6 text-base md:text-2xl">

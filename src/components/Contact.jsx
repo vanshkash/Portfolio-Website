@@ -1,58 +1,40 @@
-import React, { useState, useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Mail, Loader2 } from "lucide-react";
+import emailjs from "@emailjs/browser";
 
 export default function Contact() {
-  const [form, setForm] = useState({ name: "", email: "", message: "", honey: "" });
-  const [errors, setErrors] = useState({});
+  const formRef = useRef();
   const [status, setStatus] = useState({ loading: false, success: null, message: "" });
-  const submitRef = useRef(null);
 
-  function validate() {
-    const e = {};
-    if (!form.name.trim()) e.name = "Please enter your name";
-    if (!form.email.trim()) e.email = "Please enter your email";
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) e.email = "Enter a valid email";
-    if (!form.message.trim()) e.message = "Please enter a message";
-    if (form.honey) e.honey = "Bot detected";
-    return e;
-  }
-
-  const handleChange = (e) => {
-    setForm((s) => ({ ...s, [e.target.name]: e.target.value }));
-    setErrors((err) => ({ ...err, [e.target.name]: undefined }));
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const v = validate();
-    setErrors(v);
-    if (Object.keys(v).length) return;
-
-    setStatus({ loading: true, success: null, message: "" });
-    const ENDPOINT = "";
-
-    try {
-      if (ENDPOINT) {
-        const res = await fetch(ENDPOINT, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ name: form.name, email: form.email, message: form.message }),
-        });
-        if (!res.ok) throw new Error("Server error");
-        setStatus({ loading: false, success: true, message: "Message sent successfully!" });
-        setForm({ name: "", email: "", message: "", honey: "" });
-      } else {
-        const mailto = `mailto:your-email@example.com?subject=${encodeURIComponent(
-          "Portfolio Inquiry from " + form.name
-        )}&body=${encodeURIComponent(form.message + "\n\n" + form.email)}`;
-        window.location.href = mailto;
-        setStatus({ loading: false, success: true, message: "Opening email client..." });
-      }
-    } catch (err) {
-      setStatus({ loading: false, success: false, message: "Something went wrong. Try again." });
-      console.error(err);
+  // 🔥 Auto-hide success/error message after 3.5 sec
+  useEffect(() => {
+    if (status.message) {
+      const timer = setTimeout(() => {
+        setStatus({ loading: false, success: null, message: "" });
+      }, 3500);
+      return () => clearTimeout(timer);
     }
+  }, [status.message]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setStatus({ loading: true, success: null, message: "" });
+
+    emailjs
+      .sendForm("service_iqlibk5", "template_7edbg08", formRef.current, {
+        publicKey: "0x53Bck-i3pU7itVn",
+      })
+      .then(
+        () => {
+          setStatus({ loading: false, success: true, message: "Message sent successfully!" });
+          formRef.current.reset();
+        },
+        (error) => {
+          console.error("FAILED...", error.text);
+          setStatus({ loading: false, success: false, message: "Failed to send. Try again." });
+        }
+      );
   };
 
   return (
@@ -71,6 +53,7 @@ export default function Contact() {
         </motion.div>
 
         <motion.form
+          ref={formRef}
           onSubmit={handleSubmit}
           className="space-y-6 bg-white p-8 rounded-2xl shadow-xl border border-gray-100"
           initial={{ opacity: 0, y: 20 }}
@@ -79,62 +62,48 @@ export default function Contact() {
         >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+              <label className="block text-sm font-medium text-gray-700">
                 Full Name
               </label>
               <input
-                id="name"
                 name="name"
-                value={form.name}
-                onChange={handleChange}
-                className={`mt-2 w-full rounded-xl border p-3 shadow-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none ${errors.name ? "border-red-400" : "border-gray-300"
-                  }`}
-                placeholder="John Doe"
+                className="mt-2 w-full rounded-xl border p-3 shadow-sm focus:ring-2 focus:ring-indigo-500 border-gray-300"
+                placeholder="Your Name"
+                required
               />
-              {errors.name && <p className="text-sm text-red-600 mt-1">{errors.name}</p>}
             </div>
 
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+              <label className="block text-sm font-medium text-gray-700">
                 Email Address
               </label>
               <input
-                id="email"
+                type="email"
                 name="email"
-                value={form.email}
-                onChange={handleChange}
-                className={`mt-2 w-full rounded-xl border p-3 shadow-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none ${errors.email ? "border-red-400" : "border-gray-300"
-                  }`}
+                className="mt-2 w-full rounded-xl border p-3 shadow-sm focus:ring-2 focus:ring-indigo-500 border-gray-300"
                 placeholder="you@example.com"
+                required
               />
-              {errors.email && <p className="text-sm text-red-600 mt-1">{errors.email}</p>}
             </div>
           </div>
 
           <div>
-            <label htmlFor="message" className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium text-gray-700">
               Message
             </label>
             <textarea
-              id="message"
               name="message"
-              value={form.message}
-              onChange={handleChange}
               rows={5}
-              className={`mt-2 w-full rounded-xl border p-3 shadow-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none resize-none ${errors.message ? "border-red-400" : "border-gray-300"
-                }`}
+              className="mt-2 w-full rounded-xl border p-3 shadow-sm focus:ring-2 focus:ring-indigo-500 border-gray-300 resize-none"
               placeholder="Write your message here..."
+              required
             />
-            {errors.message && <p className="text-sm text-red-600 mt-1">{errors.message}</p>}
           </div>
-
-          <input type="text" name="honey" value={form.honey} onChange={handleChange} className="hidden" tabIndex={-1} />
 
           <div className="flex items-center justify-between flex-wrap gap-4">
             <motion.button
               whileTap={{ scale: 0.97 }}
               type="submit"
-              ref={submitRef}
               disabled={status.loading}
               className="flex items-center gap-2 px-6 py-3 rounded-xl bg-indigo-600 text-white font-medium shadow-md hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 disabled:opacity-60"
             >
@@ -143,14 +112,22 @@ export default function Contact() {
             </motion.button>
 
             <span className="text-sm text-gray-500">
-              Or email me at <a href="mailto:vanshkas87@gmail.com" className="underline">
+              Or email me at{" "}
+              <a href="mailto:vanshkas87@gmail.com" className="underline">
                 vanshkas87@gmail.com
               </a>
             </span>
           </div>
 
           {status.message && (
-            <p className={`text-sm ${status.success ? "text-green-600" : "text-red-600"}`}>{status.message}</p>
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className={`text-sm ${status.success ? "text-green-600" : "text-red-600"}`}
+            >
+              {status.message}
+            </motion.p>
           )}
         </motion.form>
       </div>
