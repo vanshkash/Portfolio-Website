@@ -117,7 +117,7 @@ export default function Hero() {
               Contact Me
             </Link>
             <a
-              href="./Resume/marksheet.pdf"
+              href="./Resume/Vansh's Resume.pdf"
               download="Vansh-Kashyap-Resume"
               className="px-4 py-3 md:px-5 md:py-3 bg-green-600 text-white rounded-lg shadow flex items-center gap-1 md:gap-2 hover:bg-green-700 transform transition-transform duration-300 hover:scale-110 text-sm md:text-base"
             >
